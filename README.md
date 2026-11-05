@@ -26,9 +26,11 @@ most recently committed worktree is closest to the prompt:
 - The path is grey and relative to the repository root, or abbreviated with `~` when outside it.
 - Detached worktrees show a yellow `(detached <sha>)` instead of a branch.
 
-Any arguments are used as the initial fzf query, which fuzzy-matches both the branch name and the
-path. If only one worktree matches, `cdw` changes to it without showing fzf:
+fzf only matches the branch name, not the path or commit date.
 
-    cdw feature/login   # by branch name
-    cdw feature_login   # by path: .worktrees/feature_login
-    cdw login           # by substring of either
+Any arguments select a worktree by branch name. An exact branch name always wins; otherwise the
+arguments are used as the initial fzf query, and if only one worktree matches, `cdw` changes to it
+without showing fzf:
+
+    cdw main            # exact branch name, even if feat/maintenance exists
+    cdw login           # fuzzy: feature/login, if it is the only match
