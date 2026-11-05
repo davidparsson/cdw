@@ -1,0 +1,8 @@
+#compdef cdw
+
+local line
+local -a branches
+git worktree list --porcelain 2>/dev/null | while IFS= read -r line; do
+    [[ $line == branch\ refs/heads/* ]] && branches+=(${line#branch refs/heads/})
+done
+_describe -t branches 'worktree branch' branches
