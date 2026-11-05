@@ -1,4 +1,4 @@
-# cd to a git worktree
+# `cdw` – `cd` into a git worktree
 
 Select one of the current repository's worktrees with [fzf](https://github.com/junegunn/fzf)
 and `cd` into it.
