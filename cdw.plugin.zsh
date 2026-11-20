@@ -28,10 +28,10 @@ _cdw_list_worktrees() {
             '') name=${branch:-"${yellow}(detached ${head:0:10})${reset}"} marker=' '
                 [[ $worktree_path == "$current_worktree" ]] && name=$green$name$reset marker='*'
                 relative_path=${(D)${${worktree_path:/$repository_root/.}#$repository_root/}}
-                entries_by_head[$head]+="$worktree_path"$'\t'"$marker"$'\t'"$name"$'\t'" $grey$relative_path$reset "$'\n' ;;
+                entries_by_head[$head]+="$worktree_path"$'\t'"$marker"$'\t'"$name"$'\t'" $grey$relative_path$reset  "$'\n' ;;
         esac
     done
-    git log --no-walk --color=always --format='%H%x09%C(dim white)(%C(dim green)%cr%C(dim white))%C(reset)' \
+    git log --no-walk --color=always --format='%H%x09%C(dim green)%cr%C(reset)' \
         ${(k)entries_by_head} | while IFS=$'\t' read -r head commit_info; do
         for line in ${(f)entries_by_head[$head]}; do
             print -r -- "$line$commit_info"
